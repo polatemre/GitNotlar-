@@ -1,1 +1,70 @@
-# GitNotlar-
+## Git Komutları:
+- git init: İlk defa projeyi uzak sunucuya yüklerken kullanırız. Git projeye yüklenir.
+- git add: Dosyayı veya klasoru takip için ekleyebiliyoruz. staged ortamına alıyoruz.
+- git add . : Bu komut ile bütün klasörü takip eder.
+- git status: Hangi dosyalar değişmiş, yeni dosya var mı, takip edilmeyen dosya var mı vs. gösterir.
+- git rm: Dosya veya klasörü silmek için
+- git config: Konfigurasyonlar... (git config user.name)
+- touch .gitignore : gitignore dosyası oluşturur
+- 
+- git commit: Snapshot(anlık görüntü) alır, projenin o anki halini kayıt altına alır. daha sonra dönebilmek için. 
+- git commit -m "mesaj" : Staged ortamına alınmış dosyaları local repository'e gönderiyoruz. m: message
+- git commit -a -m "mesaj" : -a : All anlamına geliyor, yapılan bütün değişiklikleri commit işlemine tabi tutar. git add işlemi yapmaya gerek kalmadan bütün her şeyi commit eder.
+- git commit --amend -m "mesaj" : Son yapılan committe değişiklik yapabilmemizi sağlar.
+- git revert commitid : Belirtilen committe yapılan işlemleri siler. Silme işlemini yeni commit ekleyerek yapar.
+- git reset --hard commitid : Yeni commit eklemeden belirtilen commite geri döner. Geri dönüşü olmaz, bu yüzden tehlikeli olabilir. Sonrasında gelen bütün commitler de silinir.
+- git revert bir önceki değişikliğe gider, git reset aradaki commitlerin hepsini siler.
+- git log : Yapılan commitler, commitid, hangi branchlerde commit yapıldığı vs. gösterir.
+- git log -n 1 : En üstten 1.commiti getirir.
+- 
+- git stash : Son commit'inizden itibaren yapmış olduğunuz değişiklikleri kaydeder ve en son commit haline geri döndürür. Commit yapmaz, geçici olarak saklanır. Git log'da gözükmez. Stack şeklinde kaydedilir.
+- git stash list : Kaydedilen stash'leri gösterir.
+- git stash clear : Stashteki kayıtları siler. 
+- git stash pop : En üstte kaydedilen stash'e geri döner. Son commit'ten sonra yapılan değişiklikleri getirir. Ve stashten bu kaydı siler.
+- git stash apply stashid : Spesifik olarak bir stash kaydını getirmek için kullanılır. Ve pop'tan diğer bir farkı ilgili stash kaydını silmeden bu işlemi yapar.
+-
+- git push : Aldığımız commitleri remote repository'e gönder.
+- git push origin master : origin: remote repository kök dizinini belirtir, sabittir. master: bizim çalıştığımız branch'ı belirtir. git push origin <branch_name>
+- git remote add origin http://uzak_deponun_adresi.git : Remote repository'miz yoksa yeni oluşturmak için.
+- git pull : Uzak sunucudaki projeyi bilgisayara çekmek için, değişiklikleri de çeker.
+- git clone <remote_url> : Remote repository'deki dosyaların bir kopyasını bilgisayarımızda oluşturur.
+- 
+- git checkout : Branchler veya commitler arasında geçiş için kullanılır.
+- git checkout <branch_name> : Var olan branch'e geçiş.
+- git checkout -b <branch_name> : Yeni bir branch oluşturup o branch'e geçiş yapar.
+- git checkout <commit_id> : Eski bir versiyona(commite) dönmek için.
+- 
+- git diff : Repository üzerinde yapılan değişikliklerden sonra oluşan farklılıkları gösterir.
+- git diff HEAD : Çalışma dizini ile repo arasındaki farklılıkları gösterir.
+- git diff <commit_id_1>..<commit_id_2> : İki commit arasındaki farklılıkları gösterir.
+- git diff <commit_id_1>..<commit_id_2> <dosya_adi>: İki commit arasındaki farklılıkları sadece belirtilen dosya için gösterir.
+- git diff --staged : Çalışma dizini ve staged ortamı arasındaki farklılıkları gösterir.
+- 
+- git branch <branch_name> : Yeni bir branch eklemek için. 
+- git branch -a : Tüm uzak ve yerel branchleri listeler.
+- git branch --remote : Uzak sunucudaki branchleri gösterir.
+- git branch -d <branch_name> : Branch'i siler
+- git merge <branch_name> : Başka bir branchte olan değişiklikleri, bulunduğumuz branch ile birleştirmek için. Bu merge işleminde bir commit yapmamız gerekmez. Otomatik olarak birleştirir. Birleştirilen branch'teki commitleri de getirir, git log'da görürüz.
+- git merge --squash <branch_name> : Birleştirdikten sonra commit isteği gerçekleştirmemiz gerekir. Böylece merge işlemini açık bir şekilde belirtip, açıklama ekleyebilmekteyiz. Birleştirilen branch'e ait commitleri git log'da görmeyiz, onun yerine yeni yapacağımız commiti göreceğiz.
+- git rebase <branch_name> : Birleştirme işlemini eklenmiş gibi uygular, commit tarihçesine bir şey eklenmez.
+- git merge --abort : Conflict durumunda merge işlemini iptal etmek için kullanılır.
+-
+- git fetch : Git server'ında bulunan bütün referansları getirir.
+## Git Terimleri
+- Untracked (izlenmeyen) : GIT tarafından henüz takip edilmeyen, yani yeni oluşturulmuş dosyaları ifade eder.
+- Unstaged (hazırlanmamış) : Güncellenmiş ancak commit’lenmek için hazırlanmamış dosyaları ifade eder.
+- Staged (hazırlanmış) : Commit’lenmeye hazır olan dosyaları ifade eder.
+- Deleted (silinmiş) : Projeden silinmiş ama GIT üzerinden kaldırılmamış dosyaları ifade eder.
+- Repository : Kısa ismi ile repo. Kodlarınızın saklandığı depodur.
+- Master : Depodaki kararlı sürüme master denir.
+- Branch : GIT ağaç mantığı ile çalışır. Bir projeyi versiyonladığımızda master branch'i oluşur. Ana dosya (master) üzerinde değişklik yapmak hem tehlikelidir hem de çok kişi ile yapılan geliştirmelerde karışıklığa sebep olur. Kimin neyi değiştirdiğini takip etmek zorlaşır. Bu sebeple geliştiriciler master'den açılan dallar (branch) üzerinde geliştirmelerini yapar. Kullanıcılar branch'ler üzerinde yaptıkları geliştirmelerin master ile birleştirilmesi için proje sahibine merge isteği ile gönderirler.
+- Merge : branch'larda yapılan değişikliklerin master branch'ı ile birleştirilmesidir.
+- Push : Dosyaları repo'ya (depo) göndermek için kullanılır.
+- Pull : Depodan dosyaları çekmek için kullanılır.
+- .gitignore : GIT'in takip etmesini istemediğimiz dosya ve klasörleri belirttiğimiz dökümandır. Mesela node_module klasörünün izlenmesine gerek yoktur ve .gitignore dökümanı içinde bunu belirtiriz.
+- GitHub, BitBucket, GitLab...
+- GitLab: kurumsal tarafta kullanılır, kendi sunucularına kurma imkanı verir.
+## Kritik Notlar
+- Tag'e checkout olunmaz, branch'e checkout olunur. Tag'e checkout olunup yazılan kodlar başka bir yere checkout olunduğunda tekrardan erişilemezler fakat gitte dururlar.
+- git cherry-pick commitid commitid: Başka branch'ten istenilen commitleri almak için.
+- Ortak kullanılan branch'e first push yapılmaz.
